@@ -1,47 +1,29 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import { StoreProvider, useStore, useDispatch } from './store.jsx';
+import Sidebar from './components/Sidebar.jsx';
+import ChatHeader from './components/ChatHeader.jsx';
+import ChatArea from './components/ChatArea.jsx';
+import Composer from './components/Composer.jsx';
 
-// Scaffold check screen (phase 02). Replaced by the real shell in phase 03.
-export default function App() {
-  const [ping, setPing] = useState({ state: 'checking', ts: null });
-  const [version, setVersion] = useState('');
-
-  useEffect(() => {
-    let alive = true;
-    if (!window.legion) {
-      setPing({ state: 'error', ts: null });
-      return () => {};
-    }
-    window.legion
-      .ping()
-      .then((r) => {
-        if (alive && r && r.ok) setPing({ state: 'ok', ts: r.ts });
-        else if (alive) setPing({ state: 'error', ts: null });
-      })
-      .catch(() => {
-        if (alive) setPing({ state: 'error', ts: null });
-      });
-    window.legion
-      .version()
-      .then((v) => {
-        if (alive) setVersion(v);
-      })
-      .catch(() => {});
-    return () => {
-      alive = false;
-    };
-  }, []);
-
+function Shell() {
+  const state = useStore();
+  const dispatch = useDispatch();
   return (
-    <div className="h-screen flex flex-col items-center justify-center gap-2 bg-[var(--bg)] text-[var(--text)]">
-      <h1 className="text-2xl font-semibold">Legion</h1>
-      <p className="text-sm text-[var(--muted)]">
-        {ping.state === 'ok' && 'main OK'}
-        {ping.state === 'checking' && 'memeriksa main...'}
-        {ping.state === 'error' && 'main tidak merespons (preload gagal?)'}
-      </p>
-      {version && (
-        <p className="text-xs text-[var(--muted)]">v{version}</p>
-      )}
+    <div className="h-screen flex overflow-hidden bg-[var(--bg)] text-[var(--text)]">
+      {state.sidebarOpen && <Sidebar />}
+      <main className="flex-1 flex flex-col min-w-0">
+        <ChatHeader onToggleSidebar={() => dispatch({ type: 'toggleSidebar' })} />
+        <ChatArea />
+        <Composer />
+      </main>
     </div>
+  );
+}
+
+export default function App() {
+  return (
+    <StoreProvider>
+      <Shell />
+    </StoreProvider>
   );
 }

@@ -8,7 +8,7 @@ Format bukti: nyata (output/query/log), bukan klaim.
 | Fase | Judul | Status | Commit |
 |---|---|---|---|
 | 01 | PRD & arsitektur | done | see git log |
-| 02 | Scaffold Electron | pending | |
+| 02 | Scaffold Electron | done | 2293b1a |
 | 03 | Shell layout | pending | |
 | 04 | Tema & token | pending | |
 | 05 | Komponen UI dasar | pending | |
