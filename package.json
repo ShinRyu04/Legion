@@ -1,0 +1,47 @@
+{
+  "name": "legion",
+  "productName": "Legion",
+  "version": "0.1.0",
+  "description": "Desktop multi-bot AI chat (gateway / custom endpoint / local agent), data lokal",
+  "author": "Zyrex",
+  "license": "MIT",
+  "private": true,
+  "main": "electron/main.cjs",
+  "scripts": {
+    "dev": "concurrently -k \"vite\" \"wait-on tcp:127.0.0.1:5173 && cross-env VITE_DEV_SERVER_URL=http://127.0.0.1:5173 electron --remote-debugging-port=9223 .\"",
+    "build": "vite build",
+    "dist": "npm run build && electron-builder --win nsis",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@types/react": "^18.3.31",
+    "dompurify": "^3.4.17",
+    "highlight.js": "^11.12.0",
+    "marked": "^18.1.3",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^6.2.1",
+    "autoprefixer": "^10.6.2",
+    "better-sqlite3": "^13.0.3",
+    "concurrently": "^10.0.6",
+    "cross-env": "^10.1.0",
+    "electron": "37.10.3",
+    "electron-builder": "^26.18.0",
+    "postcss": "^8.5.32",
+    "tailwindcss": "^3.4.19",
+    "vite": "^8.3.5",
+    "vitest": "^5.1.0",
+    "wait-on": "^9.5.1",
+    "ws": "^8.22.1"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "electron",
+      "better-sqlite3",
+      "electron-winstaller",
+      "esbuild"
+    ]
+  }
+}
