@@ -1,24 +1,22 @@
 // Demo data for phase 03 shell layout. Real data starts in phase 06 (DB seed).
 // Single source: never hardcode bot/thread rows anywhere else.
+// Avatar: first letter of the name; accent pairs with textOn() contrast (lib/color.js).
 export const DEMO_BOTS = [
   {
     id: 1,
     name: 'GLM',
-    avatar: '🤖',
     model_id: 'carte/zcode-bridge/glm-5.3-flash',
     accent_color: '#4ade80',
   },
   {
     id: 2,
     name: 'GPT-6',
-    avatar: '⚡',
     model_id: 'carte/agentrouter/gpt-6-astra',
     accent_color: '#fbbf24',
   },
   {
     id: 3,
     name: 'Gratis',
-    avatar: '🎈',
     model_id: 'carte/opencode2api/glm-5.3-flash-free',
     accent_color: '#60a5fa',
   },
